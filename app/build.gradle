@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    def config = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion config["compile_sdk"]
+    buildToolsVersion config["build_tools"]
+    defaultConfig {
+        applicationId config["application_id"]
+        minSdkVersion config["min_sdk"]
+        targetSdkVersion config["target_sdk"]
+        versionCode config["version_code"]
+        versionName config["version_name"]
+        testInstrumentationRunner config["test_runner"]
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    def applicationDependencies = rootProject.ext.mainApplication
+    def acceptanceTestDependencies = rootProject.ext.acceptanceTesting
+    implementation applicationDependencies.kotlin
+    implementation applicationDependencies.kotlinCoroutines
+    implementation applicationDependencies.kotlinCoroutinesAndroid
+    implementation applicationDependencies.appcompat
+    implementation applicationDependencies.corektx
+    implementation applicationDependencies.constraintlayout
+    implementation applicationDependencies.recyclerview
+
+    implementation applicationDependencies.retrofit2
+    implementation applicationDependencies.lifecycle
+
+
+
+    testImplementation acceptanceTestDependencies.junit
+    androidTestImplementation acceptanceTestDependencies.androidx_testRunner
+    androidTestImplementation acceptanceTestDependencies.espressoCore
+}

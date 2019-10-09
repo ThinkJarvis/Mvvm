@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Mvvm</string>
+
+    <string name="city_name">城市名: %s</string>
+
+    <string name="temperature">当前温度: %s</string>
+</resources>
