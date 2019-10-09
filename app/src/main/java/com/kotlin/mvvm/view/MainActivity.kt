@@ -25,7 +25,7 @@ import kotlinx.coroutines.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainViewDataBinding: MainViewDataBinding
-    lateinit var mainVM : MainViewModel
+    lateinit var mainVM: MainViewModel
     private val linearLayoutManager: LinearLayoutManager by lazy {
         LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
@@ -36,14 +36,14 @@ class MainActivity : AppCompatActivity() {
         mainViewDataBinding =
             DataBindingUtil.setContentView<MainViewDataBinding>(this, R.layout.activity_main)
         mainVM = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        mainViewDataBinding.mainViewModel =mainVM
+        mainViewDataBinding.mainViewModel = mainVM
 
         mainVM.queryWeather2()
 
-//        buildRecycler()
+        buildRecycler()
         mainVM.start.observe(this, Observer {
             if (true)
-                startActivity(Intent(this@MainActivity,SecondActivity::class.java))
+                startActivity(Intent(this@MainActivity, SecondActivity::class.java))
         })
 
 
@@ -65,22 +65,23 @@ class MainActivity : AppCompatActivity() {
 
         weatherAdapter.setDatas(dataList)
 
-        weatherAdapter.addOnItemClickListener(object : BindAdapter.OnItemClickListener<WeatherInfo> {
-            override fun itemClick(bean: WeatherInfo, view: View, position: Int) {
 
+
+        weatherAdapter.addOnItemClickListener { bean, view, position ->
+            run {
+                Log.e(
+                    "wjq",
+                    "$position"
+                )
+                handleClick()
             }
-
-        })
+        }
     }
-
 
 
     fun handleClick() {
 
     }
-
-
-
 
 
 }

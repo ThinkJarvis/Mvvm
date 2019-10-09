@@ -1,6 +1,9 @@
 package com.kotlin.mvvm.adapter
 
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.mvvm.BR
@@ -10,13 +13,11 @@ abstract class BindAdapter<T : Any, VB : ViewDataBinding> :
     RecyclerView.Adapter<BindViewHolder<VB>>() {
 
 
-    var onItemClickListener: OnItemClickListener<T>? = null
-
+    var onItemClickListener = { bean: T, view: View, position: Int -> Unit }
 
     private val dataList by lazy {
         mutableListOf<T>()
     }
-
 
     fun setDatas(list: List<T>?) {
         if (list != null) {
@@ -33,14 +34,20 @@ abstract class BindAdapter<T : Any, VB : ViewDataBinding> :
         }
     }
 
-    fun addOnItemClickListener(listener: OnItemClickListener<T>) {
-        onItemClickListener = listener
+
+    fun addOnItemClickListener(transform: (bean: T, view: View, position: Int) -> Unit) {
+        onItemClickListener = transform
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindViewHolder<VB> {
+        val binding = DataBindingUtil.inflate<VB>(LayoutInflater.from(parent.context), getLayout(), parent, false)
+        return BindViewHolder(binding.root, binding)
     }
 
     override fun onBindViewHolder(holder: BindViewHolder<VB>, position: Int) {
         val bean = dataList[position]
         holder.itemView.setOnClickListener {
-            onItemClickListener?.itemClick(bean, holder.itemView, position)
+            onItemClickListener(bean, holder.itemView, position)
         }
 
         holder.binding.setVariable(BR.item, bean)
@@ -53,9 +60,7 @@ abstract class BindAdapter<T : Any, VB : ViewDataBinding> :
 
     abstract fun getLayout(): Int
 
-    abstract fun onDirectBindViewHolder(bean: T, holder: BindViewHolder<VB>, position: Int)
+    open fun onDirectBindViewHolder(bean: T, holder: BindViewHolder<VB>, position: Int) {}
 
-    interface OnItemClickListener<T> {
-        fun itemClick(bean: T, view: View, position: Int)
-    }
+
 }

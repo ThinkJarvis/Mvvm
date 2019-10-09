@@ -26,7 +26,6 @@ object NetRepository {
 
     private suspend  fun <T, R> request(deferred: Deferred<Response<T>>, transform: (T) -> R, default: T): Either<Failure, R> {
         return try {
-            Log.e("wjq","11111111111111111111111111111")
             val response = deferred.await()
             when (response.isSuccessful) {
                 true -> Right(transform((response.body() ?: default)))

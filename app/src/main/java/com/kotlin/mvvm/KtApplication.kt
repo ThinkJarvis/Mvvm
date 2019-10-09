@@ -7,7 +7,7 @@ class KtApplication : Application() {
 
     companion object {
 
-       private lateinit var instance: KtApplication
+        private lateinit var instance: KtApplication
 
 
         fun getContext(): Context {

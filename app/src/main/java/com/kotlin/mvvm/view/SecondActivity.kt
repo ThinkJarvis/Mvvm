@@ -12,7 +12,6 @@ class SecondActivity : AppCompatActivity() {
 
     private lateinit var secondViewDataBinding: SecondViewDataBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         secondViewDataBinding = DataBindingUtil.setContentView<SecondViewDataBinding>(this, R.layout.activity_second)

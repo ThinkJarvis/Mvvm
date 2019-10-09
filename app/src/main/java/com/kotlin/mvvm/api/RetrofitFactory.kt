@@ -9,7 +9,6 @@ object RetrofitFactory {
     const val BASE_URL = "https://jsonplaceholder.typicode.com"
 
     fun createRetrofitService(): RetrofitService {
-        Log.e("wjq", "66666666666666666666")
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
