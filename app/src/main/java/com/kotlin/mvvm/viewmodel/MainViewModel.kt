@@ -25,7 +25,7 @@ class MainViewModel() : ViewModel() {
         val TAG = MainViewModel::class.java.simpleName
     }
 
-    var start= MutableLiveData<Boolean>()
+    var start = MutableLiveData<Void>()
     private val viewModelJob = SupervisorJob()
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -35,7 +35,6 @@ class MainViewModel() : ViewModel() {
     val cityName = ObservableField<String>()
 
     val temperature = ObservableField<String>()
-
 
 
     fun queryWeather() {
@@ -136,7 +135,7 @@ class MainViewModel() : ViewModel() {
 
 
     fun onCityNameClick(view: View) {
-        start.value = true
+        start.value = null
 //        if (view is TextView) {
 //            Toast.makeText(KtApplication.getContext(), ""+ NetworkHandler.isConnected(), Toast.LENGTH_SHORT).show()
 //

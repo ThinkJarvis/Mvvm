@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="@{!mainViewModel.loading ? View.VISIBLE : View.GONE}"
-            app:constraint_referenced_ids="city_name,temperature" />
+            app:constraint_referenced_ids="city_name,temperature,recycler_view" />
 
 
         <TextView

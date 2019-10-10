@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -42,8 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         buildRecycler()
         mainVM.start.observe(this, Observer {
-            if (true)
-                startActivity(Intent(this@MainActivity, SecondActivity::class.java))
+            startActivity(Intent(this@MainActivity, SecondActivity::class.java))
         })
 
 
@@ -69,10 +69,7 @@ class MainActivity : AppCompatActivity() {
 
         weatherAdapter.addOnItemClickListener { bean, view, position ->
             run {
-                Log.e(
-                    "wjq",
-                    "$position"
-                )
+                Toast.makeText(MainActivity@ this, "$position", Toast.LENGTH_SHORT).show()
                 handleClick()
             }
         }

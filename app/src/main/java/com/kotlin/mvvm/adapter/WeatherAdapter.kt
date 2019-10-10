@@ -1,11 +1,10 @@
 package com.kotlin.mvvm.adapter
 
 
-import androidx.databinding.ViewDataBinding
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.model.WeatherInfo
 
-class WeatherAdapter<T : WeatherInfo> : BindAdapter<T, ViewDataBinding>() {
+class WeatherAdapter<T : WeatherInfo> : BindAdapter<T>() {
 
 
     override fun getLayout(): Int {
