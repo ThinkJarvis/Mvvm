@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.mvvm.BR
 import com.kotlin.mvvm.model.WeatherInfo
 
-abstract class BindAdapter<T : Any, VB : ViewDataBinding> :
-    RecyclerView.Adapter<BindViewHolder<VB>>() {
+abstract class BindAdapter<T : Any> :
+    RecyclerView.Adapter<BindViewHolder>() {
 
 
     var onItemClickListener = { bean: T, view: View, position: Int -> Unit }
+
+//    var onItemClickListeners = mutableListOf<(bean: T, view: View, position: Int) -> Unit>()
 
     private val dataList by lazy {
         mutableListOf<T>()
@@ -37,19 +39,25 @@ abstract class BindAdapter<T : Any, VB : ViewDataBinding> :
 
     fun addOnItemClickListener(transform: (bean: T, view: View, position: Int) -> Unit) {
         onItemClickListener = transform
+//        onItemClickListeners.add(transform)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindViewHolder<VB> {
-        val binding = DataBindingUtil.inflate<VB>(LayoutInflater.from(parent.context), getLayout(), parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindViewHolder {
+        val binding = DataBindingUtil.inflate<ViewDataBinding>(
+            LayoutInflater.from(parent.context),
+            getLayout(),
+            parent,
+            false
+        )
         return BindViewHolder(binding.root, binding)
     }
 
-    override fun onBindViewHolder(holder: BindViewHolder<VB>, position: Int) {
+    override fun onBindViewHolder(holder: BindViewHolder, position: Int) {
         val bean = dataList[position]
         holder.itemView.setOnClickListener {
             onItemClickListener(bean, holder.itemView, position)
         }
-
+        //build.gradle must need "apply plugin: 'kotlin-kapt'"
         holder.binding.setVariable(BR.item, bean)
         onDirectBindViewHolder(bean, holder, position)
     }
@@ -60,7 +68,6 @@ abstract class BindAdapter<T : Any, VB : ViewDataBinding> :
 
     abstract fun getLayout(): Int
 
-    open fun onDirectBindViewHolder(bean: T, holder: BindViewHolder<VB>, position: Int) {}
-
+    open fun onDirectBindViewHolder(bean: T, holder: BindViewHolder, position: Int) {}
 
 }
