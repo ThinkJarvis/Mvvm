@@ -1,34 +1,23 @@
 package com.kotlin.mvvm.viewmodel
 
-import android.app.Activity
-import android.content.Intent
 import android.util.Log
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
-import androidx.databinding.BaseObservable
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.kotlin.mvvm.KtApplication
 import com.kotlin.mvvm.R
-import com.kotlin.mvvm.api.NetworkHandler
 import com.kotlin.mvvm.model.WeatherInfo
-import com.kotlin.mvvm.view.MainActivity
-import com.kotlin.mvvm.view.SecondActivity
+import com.kotlin.mvvm.platform.CoroutineViewModel
 import kotlinx.coroutines.*
 
-class MainViewModel() : ViewModel() {
+class MainViewModel : CoroutineViewModel() {
 
     companion object {
         val TAG = MainViewModel::class.java.simpleName
     }
 
     var start = MutableLiveData<Void>()
-    private val viewModelJob = SupervisorJob()
-
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     val loading = ObservableBoolean(false)
 
@@ -40,7 +29,7 @@ class MainViewModel() : ViewModel() {
     fun queryWeather() {
 
         loading.set(true)
-        uiScope.launch {
+        launch {
 
             val deferred = async {
                 delay(1000 * 3)
@@ -66,7 +55,7 @@ class MainViewModel() : ViewModel() {
 
     fun queryWeather1() {
         loading.set(true)
-        uiScope.launch(Dispatchers.Main) {
+        launch {
             var weatherInfo: WeatherInfo
             weatherInfo = withContext(Dispatchers.Default) {
                 delay(2000)
@@ -100,7 +89,7 @@ class MainViewModel() : ViewModel() {
 
     fun queryWeather2() {
         loading.set(true)
-        uiScope.launch(Dispatchers.Main) {
+        launch {
             var deferred1 = async(Dispatchers.Default) {
                 delay(2000)
                 Log.e("wjq", "deferred1 end")

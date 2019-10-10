@@ -16,6 +16,7 @@ abstract class UseCase<out Type, in Params> where Type : Any {
         uiScope.launch {
             onResult(run(params))
         }
+
     }
 
     class None

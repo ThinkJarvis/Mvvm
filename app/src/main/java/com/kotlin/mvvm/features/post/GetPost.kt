@@ -9,4 +9,5 @@ import com.kotlin.mvvm.model.Post
 
 object GetPost : UseCase<List<Post>, None>() {
     override suspend fun run(params: None): Either<Failure, List<Post>> = NetRepository.getPosts()
+
 }

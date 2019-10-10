@@ -1,6 +1,5 @@
 package com.kotlin.mvvm.api
 
-import android.util.Log
 import com.kotlin.mvvm.exception.Failure
 import com.kotlin.mvvm.exception.Failure.NetworkConnection
 import com.kotlin.mvvm.exception.Failure.ServerError

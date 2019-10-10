@@ -3,30 +3,23 @@ package com.kotlin.mvvm.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kotlin.mvvm.KtApplication
 import com.kotlin.mvvm.R
-import com.kotlin.mvvm.adapter.BindAdapter
 import com.kotlin.mvvm.adapter.WeatherAdapter
 import com.kotlin.mvvm.databinding.MainViewDataBinding
 import com.kotlin.mvvm.model.WeatherInfo
 import com.kotlin.mvvm.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_item.*
-import kotlinx.coroutines.*
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainViewDataBinding: MainViewDataBinding
-    lateinit var mainVM: MainViewModel
+    private lateinit var mainVM: MainViewModel
     private val linearLayoutManager: LinearLayoutManager by lazy {
         LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
