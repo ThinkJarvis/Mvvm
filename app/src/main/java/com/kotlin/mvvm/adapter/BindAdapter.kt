@@ -16,8 +16,6 @@ abstract class BindAdapter<T : Any> :
 
     internal var onItemClickListener: (bean: T, view: View, position: Int) -> Unit = { _, _, _ -> }
 
-
-
     internal var collection: List<T> by Delegates.observable(emptyList()) { _, _, _ ->
         notifyDataSetChanged()
     }

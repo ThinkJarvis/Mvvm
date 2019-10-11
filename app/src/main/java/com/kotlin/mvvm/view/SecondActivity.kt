@@ -1,8 +1,6 @@
 package com.kotlin.mvvm.view
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,10 +9,7 @@ import com.kotlin.mvvm.adapter.PostAdapter
 import com.kotlin.mvvm.databinding.SecondViewDataBinding
 import com.kotlin.mvvm.exception.Failure
 import com.kotlin.mvvm.exception.Failure.*
-import com.kotlin.mvvm.extension.failure
-import com.kotlin.mvvm.extension.observe
-import com.kotlin.mvvm.extension.toast
-import com.kotlin.mvvm.extension.viewModel
+import com.kotlin.mvvm.extension.*
 import com.kotlin.mvvm.model.Post
 import com.kotlin.mvvm.model.PostFailure.NonExistentMovie
 import com.kotlin.mvvm.viewmodel.SecondViewModel
@@ -33,8 +28,7 @@ class SecondActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        secondViewDataBinding =
-            DataBindingUtil.setContentView<SecondViewDataBinding>(this, R.layout.activity_second)
+        secondViewDataBinding = setContentView { R.layout.activity_second }
         secondVM = viewModel {
             observe(posts, ::renderPostList)
             failure(failure, ::renderFailure)

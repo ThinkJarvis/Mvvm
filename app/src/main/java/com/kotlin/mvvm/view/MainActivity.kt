@@ -3,7 +3,6 @@ package com.kotlin.mvvm.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -11,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kotlin.mvvm.R
 import com.kotlin.mvvm.adapter.WeatherAdapter
 import com.kotlin.mvvm.databinding.MainViewDataBinding
+import com.kotlin.mvvm.extension.setContentView
+import com.kotlin.mvvm.extension.toast
 import com.kotlin.mvvm.model.WeatherInfo
 import com.kotlin.mvvm.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,9 +28,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mainViewDataBinding =
-            DataBindingUtil.setContentView<MainViewDataBinding>(this, R.layout.activity_main)
+        mainViewDataBinding = setContentView { R.layout.activity_main }
+
         mainVM = ViewModelProviders.of(this)[MainViewModel::class.java]
+
         mainViewDataBinding.mainViewModel = mainVM
 
         mainVM.queryWeather2()
@@ -58,19 +60,11 @@ class MainActivity : AppCompatActivity() {
 
         weatherAdapter.collection = dataList
 
-
-
         weatherAdapter.onItemClickListener = { bean, view, position ->
-            Toast.makeText(MainActivity@ this, "$position", Toast.LENGTH_SHORT).show()
-            handleClick()
+            toast("$position")
+
         }
     }
-
-
-    fun handleClick() {
-
-    }
-
 
 }
 

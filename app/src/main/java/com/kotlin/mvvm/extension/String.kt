@@ -1,3 +1,3 @@
 package com.kotlin.mvvm.extension
 
-fun String.Companion.empty() = ""
+inline fun String.Companion.empty() = ""
