@@ -1,7 +1,8 @@
 package com.kotlin.mvvm.api
 
-import android.util.Log
+
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -13,6 +14,12 @@ object RetrofitFactory {
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .build().create(RetrofitService::class.java)
+            .client(getClient())
+            .build()
+            .create(RetrofitService::class.java)
     }
+
+
+    private fun getClient(): OkHttpClient =
+        OkHttpClient.Builder().addInterceptor(LoggerInterceptor()).build()
 }

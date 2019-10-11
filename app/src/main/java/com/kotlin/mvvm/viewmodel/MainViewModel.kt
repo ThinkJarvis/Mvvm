@@ -53,6 +53,8 @@ class MainViewModel : CoroutineViewModel() {
         }
     }
 
+
+
     fun queryWeather1() {
         loading.set(true)
         launch {

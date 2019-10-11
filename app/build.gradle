@@ -35,17 +35,19 @@ dependencies {
     implementation applicationDependencies.kotlin
     implementation applicationDependencies.kotlinCoroutines
     implementation applicationDependencies.kotlinCoroutinesAndroid
+    implementation applicationDependencies.lifecycle
     implementation applicationDependencies.appcompat
     implementation applicationDependencies.corektx
     implementation applicationDependencies.constraintlayout
     implementation applicationDependencies.recyclerview
 
     implementation applicationDependencies.retrofit2
-    implementation applicationDependencies.lifecycle
-
+    implementation applicationDependencies.interceptor
+    implementation applicationDependencies.logger
 
 
     testImplementation acceptanceTestDependencies.junit
     androidTestImplementation acceptanceTestDependencies.androidx_testRunner
     androidTestImplementation acceptanceTestDependencies.espressoCore
+
 }

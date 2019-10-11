@@ -7,53 +7,30 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.kotlin.mvvm.BR
+import com.kotlin.mvvm.model.Post
 import com.kotlin.mvvm.model.WeatherInfo
+import kotlin.properties.Delegates
 
 abstract class BindAdapter<T : Any> :
     RecyclerView.Adapter<BindViewHolder>() {
 
-
-    var onItemClickListener = { bean: T, view: View, position: Int -> Unit }
-
-//    var onItemClickListeners = mutableListOf<(bean: T, view: View, position: Int) -> Unit>()
-
-    private val dataList by lazy {
-        mutableListOf<T>()
-    }
-
-    fun setDatas(list: List<T>?) {
-        if (list != null) {
-            dataList.addAll(list)
-            notifyDataSetChanged()
-        }
-
-    }
-
-    fun setDataByPosition(t: T?, position: Int) {
-        if (t != null) {
-            dataList.add(position, t)
-            notifyDataSetChanged()
-        }
-    }
+    internal var onItemClickListener: (bean: T, view: View, position: Int) -> Unit = { _, _, _ -> }
 
 
-    fun addOnItemClickListener(transform: (bean: T, view: View, position: Int) -> Unit) {
-        onItemClickListener = transform
-//        onItemClickListeners.add(transform)
+
+    internal var collection: List<T> by Delegates.observable(emptyList()) { _, _, _ ->
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindViewHolder {
         val binding = DataBindingUtil.inflate<ViewDataBinding>(
-            LayoutInflater.from(parent.context),
-            getLayout(),
-            parent,
-            false
+            LayoutInflater.from(parent.context), getLayout(), parent, false
         )
         return BindViewHolder(binding.root, binding)
     }
 
     override fun onBindViewHolder(holder: BindViewHolder, position: Int) {
-        val bean = dataList[position]
+        val bean = collection[position]
         holder.itemView.setOnClickListener {
             onItemClickListener(bean, holder.itemView, position)
         }
@@ -62,9 +39,8 @@ abstract class BindAdapter<T : Any> :
         onDirectBindViewHolder(bean, holder, position)
     }
 
-    override fun getItemCount(): Int {
-        return dataList.size
-    }
+    override fun getItemCount() = collection.size
+
 
     abstract fun getLayout(): Int
 

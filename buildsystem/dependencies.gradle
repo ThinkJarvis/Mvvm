@@ -22,7 +22,9 @@ ext {
             constraintlayout       : "androidx.constraintlayout:constraintlayout:$constraintlayout_version",
             recyclerview           : "androidx.recyclerview:recyclerview:$recyclerview_version",
             retrofit2              : "com.squareup.retrofit2:converter-gson:2.6.2",
+            interceptor            : "com.squareup.okhttp3:logging-interceptor:4.2.2",
             lifecycle              : "android.arch.lifecycle:extensions:1.1.1",
+            logger                 : "com.orhanobut:logger:2.2.0",
     ]
     acceptanceTesting = [
             junit              : "junit:junit:4.12",

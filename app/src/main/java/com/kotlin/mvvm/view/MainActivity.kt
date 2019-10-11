@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         mainViewDataBinding =
             DataBindingUtil.setContentView<MainViewDataBinding>(this, R.layout.activity_main)
-        mainVM = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        mainVM = ViewModelProviders.of(this)[MainViewModel::class.java]
         mainViewDataBinding.mainViewModel = mainVM
 
         mainVM.queryWeather2()
@@ -56,15 +56,13 @@ class MainActivity : AppCompatActivity() {
             dataList.add(weatherInfo)
         }
 
-        weatherAdapter.setDatas(dataList)
+        weatherAdapter.collection = dataList
 
 
 
-        weatherAdapter.addOnItemClickListener { bean, view, position ->
-            run {
-                Toast.makeText(MainActivity@ this, "$position", Toast.LENGTH_SHORT).show()
-                handleClick()
-            }
+        weatherAdapter.onItemClickListener = { bean, view, position ->
+            Toast.makeText(MainActivity@ this, "$position", Toast.LENGTH_SHORT).show()
+            handleClick()
         }
     }
 
