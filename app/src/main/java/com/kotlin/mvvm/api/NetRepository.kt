@@ -13,7 +13,7 @@ import retrofit2.Response
 object NetRepository {
 
     private val service: RetrofitService by lazy {
-        RetrofitFactory.createRetrofitService()
+        RetrofitFactory.createRetrofitService<RetrofitService>()
     }
 
     suspend fun getPosts(): Either<Failure, List<Post>> {
@@ -23,12 +23,14 @@ object NetRepository {
         }
     }
 
-    private suspend  fun <T, R> request(deferred: Deferred<Response<T>>, transform: (T) -> R, default: T): Either<Failure, R> {
+    private suspend fun <T, R> request(
+        deferred: Deferred<Response<T>>, transform: (T) -> R,
+        default: T): Either<Failure, R> {
         return try {
             val response = deferred.await()
             when (response.isSuccessful) {
                 true -> Right(transform((response.body() ?: default)))
-                false ->Left(ServerError)
+                false -> Left(ServerError)
             }
         } catch (exception: Throwable) {
             Left(ServerError)

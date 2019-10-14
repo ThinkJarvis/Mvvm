@@ -4,7 +4,7 @@ import com.kotlin.mvvm.exception.Failure
 import com.kotlin.mvvm.functional.Either
 import kotlinx.coroutines.*
 
-abstract class UseCase<out Type, in Params> where Type : Any {
+abstract class UseCase<out Type, in Params> where Type : Any, Params : Any {
 
     private val netJob = SupervisorJob()
 

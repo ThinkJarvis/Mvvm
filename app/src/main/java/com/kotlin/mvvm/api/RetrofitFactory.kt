@@ -9,15 +9,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitFactory {
     const val BASE_URL = "https://jsonplaceholder.typicode.com"
 
-    fun createRetrofitService(): RetrofitService {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .client(getClient())
-            .build()
-            .create(RetrofitService::class.java)
-    }
+    inline fun <reified T> createRetrofitService(): T =
+        createRetrofit().create(getRetrofitService<T>())
+
+
+    fun createRetrofit(): Retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .client(getClient())
+        .build()
+
+    inline fun <reified T> getRetrofitService(): Class<T> = T::class.java
 
 
     private fun getClient(): OkHttpClient =

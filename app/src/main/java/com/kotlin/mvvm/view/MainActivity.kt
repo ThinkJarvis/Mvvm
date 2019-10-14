@@ -37,10 +37,10 @@ class MainActivity : AppCompatActivity() {
         mainVM.queryWeather2()
 
         buildRecycler()
+
         mainVM.start.observe(this, Observer {
             startActivity(Intent(this@MainActivity, SecondActivity::class.java))
         })
-
 
     }
 
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         var dataList = mutableListOf<WeatherInfo>()
         for (i in 0..10) {
-            var weatherInfo: WeatherInfo = WeatherInfo("南京", "0")
+            var weatherInfo = WeatherInfo("南京", "0")
             weatherInfo.cityName = "南京" + i
             weatherInfo.temperature = "" + i
             dataList.add(weatherInfo)
