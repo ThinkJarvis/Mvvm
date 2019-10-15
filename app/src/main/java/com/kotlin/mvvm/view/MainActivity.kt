@@ -3,6 +3,7 @@ package com.kotlin.mvvm.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -54,19 +55,23 @@ class MainActivity : AppCompatActivity() {
 
         var dataList = mutableListOf<WeatherInfo>()
         for (i in 0..10) {
-            var weatherInfo = WeatherInfo("南京", "0")
-            weatherInfo.cityName = "南京" + i
-            weatherInfo.temperature = "" + i
-            dataList.add(weatherInfo)
+            dataList.add(WeatherInfo("南京", "0").apply {
+                cityName = "南京" + i
+                temperature = "" + i
+            })
         }
 
-        weatherAdapter.collection = dataList
-
-        weatherAdapter.onItemClickListener = { bean, view, position ->
-            toast("$position")
-
+        weatherAdapter.run {
+            collection = dataList
+            onItemClickListener = handleClick()
         }
+
     }
+
+    private fun <T> handleClick() = { bean: T, view: View, position: Int ->
+        toast("$position")
+    }
+
 
 }
 

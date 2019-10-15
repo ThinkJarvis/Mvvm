@@ -37,7 +37,7 @@ class SecondActivity : AppCompatActivity() {
 
         secondVM.loadingData()
 
-        recycler_view?.run {
+        recycler_view.run {
             layoutManager = linearLayoutManager
             adapter = postAdapter
         }
@@ -49,6 +49,8 @@ class SecondActivity : AppCompatActivity() {
             renderFailure(NonExistentMovie())
         else
             postAdapter.collection = posts.orEmpty()
+
+
     }
 
     private fun renderFailure(failure: Failure?) {
