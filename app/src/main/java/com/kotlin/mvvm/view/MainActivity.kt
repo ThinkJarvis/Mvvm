@@ -46,9 +46,11 @@ class MainActivity : AppCompatActivity() {
 
     fun buildRecycler() {
         var weatherAdapter = WeatherAdapter<WeatherInfo>()
-        recycler_view.layoutManager = linearLayoutManager
-        recycler_view.adapter = weatherAdapter
 
+        recycler_view.run {
+            layoutManager = linearLayoutManager
+            adapter = weatherAdapter
+        }
 
         var dataList = mutableListOf<WeatherInfo>()
         for (i in 0..10) {

@@ -37,8 +37,10 @@ class SecondActivity : AppCompatActivity() {
 
         secondVM.loadingData()
 
-        recycler_view.layoutManager = linearLayoutManager
-        recycler_view.adapter = postAdapter
+        recycler_view?.run {
+            layoutManager = linearLayoutManager
+            adapter = postAdapter
+        }
     }
 
 
