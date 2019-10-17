@@ -8,14 +8,14 @@
 
         <variable
             name="secondViewModel"
-            type="com.kotlin.mvvm.viewmodel.SecondViewModel" />
+            type="com.kotlin.mvvm.presentation.viewmodel.SecondViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.SecondActivity">
+        tools:context=".presentation.view.SecondActivity">
 
         <ProgressBar
             style="?android:attr/progressBarStyleLarge"

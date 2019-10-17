@@ -5,7 +5,7 @@
 
         <variable
             name="item"
-            type="com.kotlin.mvvm.model.Post" />
+            type="com.kotlin.mvvm.data.model.Post" />
 
     </data>
 
