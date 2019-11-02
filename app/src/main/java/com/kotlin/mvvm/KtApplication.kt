@@ -22,7 +22,6 @@ class KtApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-
         initLogger()
     }
 
@@ -41,7 +40,7 @@ class KtApplication : Application() {
             .showThreadInfo(false)  // 是否显示线程信息，默认为ture
             .methodCount(1)         // 显示的方法行数
             .methodOffset(0)        // 隐藏内部方法调用到偏移量
-            .tag("tag")
+            .tag("WalletService")
             .build()
 
 }

@@ -1,9 +1,9 @@
 package com.kotlin.mvvm.data.repository
 
-import com.kotlin.mvvm.data.model.Failure
-import com.kotlin.mvvm.data.model.Either
-import kotlinx.coroutines.Deferred
-import retrofit2.Response
+
+import com.kotlin.walletservice.model.Either
+import com.kotlin.walletservice.model.Failure
+import retrofit2.Call
 
 
 abstract class INetRepository<out T> {
@@ -13,12 +13,12 @@ abstract class INetRepository<out T> {
 
     abstract fun createAPIService(): T
 
-    protected suspend fun <T, R> request(
-        deferred: Deferred<Response<T>>, transform: (T) -> R,
+    protected fun <T, R> request(
+        call: Call<T>, transform: (T) -> R,
         default: T
     ): Either<Failure, R> {
         return try {
-            val response = deferred.await()
+            val response = call.execute()
             when (response.isSuccessful) {
                 true -> Either.Right(transform((response.body() ?: default)))
                 false -> Either.Left(Failure.ServerError)

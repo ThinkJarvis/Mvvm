@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.kotlin.walletservice.platform.MaterialViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/layout_table"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:scrollable="false" />
+
+
+    <com.kotlin.mvvm.presentation.view.widget.UserTabLayout
+        android:id="@+id/layout_table"
+        android:layout_width="match_parent"
+        android:layout_height="66px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:tabBackground="@android:color/transparent"
+        app:tabContentStart="0dp"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@android:color/transparent"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

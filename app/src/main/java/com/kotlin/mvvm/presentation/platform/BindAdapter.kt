@@ -5,8 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
-import com.kotlin.mvvm.BR
+
 import kotlin.properties.Delegates
 
 abstract class BindAdapter<T : Any> :
@@ -36,7 +37,6 @@ abstract class BindAdapter<T : Any> :
     }
 
     override fun getItemCount() = collection.size
-
 
     abstract fun getLayout(): Int
 

@@ -1,8 +1,8 @@
 package com.kotlin.mvvm.presentation.view.adapter
 
 import com.kotlin.mvvm.R
-import com.kotlin.mvvm.data.model.Post
 import com.kotlin.mvvm.presentation.platform.BindAdapter
+import com.kotlin.walletservice.model.Post
 
 class PostAdapter : BindAdapter<Post>() {
 

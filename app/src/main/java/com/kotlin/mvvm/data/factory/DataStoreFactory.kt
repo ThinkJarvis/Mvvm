@@ -9,12 +9,10 @@ class DataStoreFactory private constructor() : IDataStoreFactory() {
         mutableMapOf(PostRepository::class.java.simpleName to PostRepository())
 
     companion object {
-        private val instance: DataStoreFactory by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+        val instance: DataStoreFactory by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
             DataStoreFactory()
         }
 
-        fun instance(): DataStoreFactory =
-            instance
     }
 
 

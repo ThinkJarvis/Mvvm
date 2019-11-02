@@ -1,7 +1,9 @@
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
+
 apply plugin: 'kotlin-kapt'
+
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -23,7 +25,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     dataBinding {
         enabled = true
     }
@@ -40,14 +44,15 @@ dependencies {
     implementation applicationDependencies.corektx
     implementation applicationDependencies.constraintlayout
     implementation applicationDependencies.recyclerview
+    implementation applicationDependencies.material
 
     implementation applicationDependencies.retrofit2
     implementation applicationDependencies.interceptor
     implementation applicationDependencies.logger
 
-
     testImplementation acceptanceTestDependencies.junit
     androidTestImplementation acceptanceTestDependencies.androidx_testRunner
     androidTestImplementation acceptanceTestDependencies.espressoCore
+    implementation project(path: ':walletservice')
 
 }

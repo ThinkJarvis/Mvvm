@@ -2,7 +2,7 @@ package com.kotlin.mvvm.presentation.platform
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kotlin.mvvm.data.model.Failure
+import com.kotlin.walletservice.model.Failure
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

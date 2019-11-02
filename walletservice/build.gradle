@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+
+    defaultConfig {
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+
+
+dependencies {
+    def applicationDependencies = rootProject.ext.mainApplication
+    def acceptanceTestDependencies = rootProject.ext.acceptanceTesting
+    implementation applicationDependencies.kotlin
+    implementation applicationDependencies.kotlinCoroutines
+    implementation applicationDependencies.kotlinCoroutinesAndroid
+    implementation applicationDependencies.lifecycle
+    implementation applicationDependencies.appcompat
+    implementation applicationDependencies.corektx
+    implementation applicationDependencies.constraintlayout
+    implementation applicationDependencies.recyclerview
+
+    implementation applicationDependencies.retrofit2
+    implementation applicationDependencies.interceptor
+    implementation applicationDependencies.logger
+    implementation applicationDependencies.material
+
+    testImplementation acceptanceTestDependencies.junit
+    androidTestImplementation acceptanceTestDependencies.androidx_testRunner
+    androidTestImplementation acceptanceTestDependencies.espressoCore
+
+
+}
